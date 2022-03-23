@@ -1,0 +1,52 @@
+- id: '1622154421481'
+  alias: Motion Bathroom
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.bathroom_sensor_motion
+    to: 'on'
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: light.main_bathroom_light
+      state: 'off'
+    - condition: state
+      entity_id: input_boolean.bathroom_light_turned_by_motion
+      state: 'on'
+  action:
+  - service: homeassistant.turn_on
+    target:
+      entity_id: light.main_bathroom_light
+  - service: homeassistant.turn_on
+    target:
+      entity_id: input_boolean.bathroom_light_turned_by_motion
+  - wait_template: ''
+    timeout: 00:05:00
+    continue_on_timeout: true
+  - service: homeassistant.turn_off
+    target:
+      entity_id: light.main_bathroom_light
+  - service: homeassistant.turn_off
+    target:
+      entity_id: input_boolean.bathroom_light_turned_by_motion
+  mode: restart
+
+- id: '1573007973743'
+  alias: Bathroom Fan On
+  description: ''
+  trigger:
+  - above: 50
+    entity_id: sensor.bathroom_sensor_relative_humidity_measurement
+    platform: numeric_state
+  - event: start
+    platform: homeassistant
+  condition:
+  - above: 50
+    condition: numeric_state
+    entity_id: sensor.bathroom_sensor_relative_humidity_measurement
+  action:
+  - device_id: 456c8971e6be46c8ae6f3a4d4a6eb014
+    domain: switch
+    entity_id: switch.bathroomfan
+    type: turn_on

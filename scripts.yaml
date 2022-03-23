@@ -1,0 +1,316 @@
+living_room_apple_tv_on:
+  alias: Living Room TV On
+  description: Power on the Living Room Apple TV
+  sequence:
+  - service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: Power On
+      device: 49531715
+  #- delay: 4
+  - service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: Home
+      device: 76529487
+
+living_room_apple_tv_off:
+  alias: Living Room TV Off
+  description: Power off the Living Room Apple TV
+  sequence:
+  - service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: Home
+      device: 76529487
+  - delay: 1
+  - service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: PowerOff
+      device: 66670693
+
+living_room_apple_tv_up:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: DirectionUp
+      device: 76529487
+
+living_room_apple_tv_down:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: DirectionDown
+      device: 76529487
+
+living_room_apple_tv_select:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: Select
+      device: 76529487
+
+living_room_apple_tv_left:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: DirectionLeft
+      device: 76529487
+
+living_room_apple_tv_right:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: DirectionRight
+      device: 76529487
+
+living_room_apple_tv_home:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: Home
+      device: 76529487
+
+living_room_apple_tv_back:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: Back
+      device: 76529487
+
+living_room_apple_tv_play:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: Play
+      device: 76529487
+
+living_room_tv_vol_up:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: VolumeUp
+      device: 66670693
+
+living_room_tv_vol_down:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: VolumeDown
+      device: 66670693
+
+living_room_tv_mute:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: Mute
+      device: 66670693
+
+living_room_tv_live:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: InputTv
+      device: 66670693
+
+living_room_tv_ch_up:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: ChannelUp
+      device: 66670693
+
+living_room_tv_ch_down:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: ChannelDown
+      device: 66670693
+
+bedroom_fire_tv_on:
+  alias: Bedroom TV On
+  description: Power on the Living Room Apple TV
+  sequence:
+  - service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: PowerOn
+      device: 66670702
+  #- delay: 4
+  - service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: Home
+      device: 66670724
+
+bedroom_fire_tv_off:
+  alias: Bedroom TV Off
+  description: Power off the Living Room Apple TV
+  sequence:
+  - service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: Home
+      device: 66670724
+  - delay: 1
+  - service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: PowerOff
+      device: 66670702
+
+bedroom_tv_vol_up:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: VolumeUp
+      device: 66670702
+
+bedroom_tv_vol_down:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: VolumeDown
+      device: 66670702
+
+bedroom_tv_mute:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: Mute
+      device: 66670702
+
+bedroom_tv_live:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: InputTv
+      device: 66670702
+
+bedroom_tv_ch_up:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: ChannelUp
+      device: 66670702
+
+bedroom_tv_ch_down:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: ChannelDown
+      device: 66670702
+
+bedroom_fire_tv_up:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: DirectionUp
+      device: 66670724
+
+bedroom_fire_tv_down:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: DirectionDown
+      device: 66670724
+
+bedroom_fire_tv_select:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: OK
+      device: 66670724
+
+bedroom_fire_tv_left:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: DirectionLeft
+      device: 66670724
+
+bedroom_fire_tv_right:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: DirectionRight
+      device: 66670724
+
+bedroom_fire_tv_home:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: Home
+      device: 66670724
+
+bedroom_fire_tv_back:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: Back
+      device: 66670724
+
+bedroom_fire_tv_play:
+  sequence:
+    service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: Play
+      device: 66670724
+
+bathroom_fan_full_on:
+  sequence:
+    - alias: "Bathroom Fan On"
+      service: light.turn_on
+      target:
+        entity_id: switch.bathroom_fan
+    - delay: '00:00:01'
+    - alias: "Bathroom Fan Off"
+      service: light.turn_off
+      target:
+        entity_id: switch.bathroom_fan
+    - delay: '00:00:01'
+    - alias: "Bathroom Fan On"
+      service: light.turn_on
+      target:
+        entity_id: switch.bathroom_fan
+
+laundry_room_fan_on:
+  sequence:
+    - alias: "Laundry Fan On"
+      service: light.turn_on
+      target:
+        entity_id: switch.laundry_fan
+    - delay: '02:00:00'
+    - alias: "Laundry Room Fan Off"
+      service: light.turn_off
+      target:
+        entity_id: switch.laundry_fan

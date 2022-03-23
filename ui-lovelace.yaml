@@ -1,0 +1,698 @@
+#################################
+#     Button Card Templates     #
+#################################
+button_card_templates:
+  icon_button:
+    aspect_ratio: 4/3
+    color_type: icon
+    hold_action:
+      action: none
+    layout: vertical
+    show_label: false
+    show_name: false
+    show_state: false
+    styles:
+      card:
+        - border-radius: 10px
+        - border: solid 1px var(--primary-color)
+        - box-shadow: none
+        - padding: 6px 6px
+        - margin: 0px 0px
+        - '--paper-card-background-color': 'rgba(0, 0, 0, 0)'
+      icon:
+        - width: 28px
+      name:
+        - justify-self: middle
+        - align-self: end
+        - font-size: 14px
+        - padding: 0px 0px
+        - color: var(--secondary-text-color)
+    tap_action:
+      action: call-service
+  menu_button:
+    aspect_ratio: 4/3
+    color_type: icon
+    hold_action:
+      action: none
+    layout: vertical
+    show_label: false
+    show_name: true
+    show_state: false
+    styles:
+      card:
+        - border-radius: 10px
+        - border: solid 1px var(--primary-color)
+        - box-shadow: none
+        - padding: 6px 6px
+        - margin: 0px 0px
+        - '--paper-card-background-color': 'rgba(0, 0, 0, 0)'
+      icon:
+        - width: 28px
+      name:
+        - justify-self: middle
+        - align-self: end
+        - font-size: 14px
+        - padding: 0px 0px
+        - color: var(--secondary-text-color)
+    tap_action:
+      action: call-service
+
+#################
+#     Views     #
+#################
+views:
+#########################
+#     Light Control     #
+#########################
+  - title: Light Control
+    # Unique path for direct access /lovelace/${path}
+    path: light_control
+    cards:
+      ######################
+      #     All Lights     #
+      ######################
+      - title: All Lights
+        type: glance
+        entities:
+        - group.all_lights
+        - light.main_kitchen_light
+        - light.kitchen_cabinet_light
+        - light.main_dining_room_light
+        - switch.occulus_light
+        - switch.living_room_watch_apple_tv
+        - light.main_living_room_lamp
+        - light.couch_light
+        - light.couch_rgb
+        - light.tv_rgb
+        - switch.christmas_tree_light
+        - switch.living_room_watch_fire_tv_bedroom
+        - light.joes_light
+        - light.shirleys_light
+        - switch.led_string_lights
+        - switch.bedroom_closet
+        - switch.laundry_fan
+        - light.main_bathroom_light
+        - switch.bathroom_fan
+        - light.desk_light
+        - switch.laptop
+    ###################
+    #     Bedroom     #
+    ###################
+      - title: Bedroom
+        type: entities
+        entities:
+        - entity: group.bedroom_lights
+        - name: Joes Light
+          type: custom:slider-entity-row
+          entity: light.joes_light
+          toggle: true
+        - name: Shirley's Light
+          type: custom:slider-entity-row
+          entity: light.shirleys_light
+          toggle: true
+        - entity: switch.led_string_lights
+        - entity: switch.bedroomrgb
+        - entity: switch.bedroom_closet
+    #######################
+    #     Dining Room     #
+    #######################
+      - title: Dining Room
+        type: entities
+        entities:
+        - name: Dining Room Light
+          type: custom:slider-entity-row
+          entity: light.main_dining_room_light
+          toggle: true
+        - entity: switch.occulus_light
+    ###################
+    #     Kitchen     #
+    ###################
+      - title: Kitchen
+        type: entities
+        entities:
+        - entity: light.garbage_disposal
+        - name: Under Cabinet Light
+          type: custom:slider-entity-row
+          entity: light.kitchen_cabinet_light
+          toggle: true
+        - name: Main Kitchen Light
+          type: custom:slider-entity-row
+          entity: light.main_kitchen_light
+          toggle: true
+        - entity: scene.cooking_in_kitchen
+        - entity: scene.spring_blossom_in_kitchen
+        - entity: scene.tropical_twilight_in_kitchen
+        - entity: scene.savanna_sunset_in_kitchen
+        - entity: scene.arctic_aurora_in_kitchen
+        - entity: scene.dimmed_in_kitchen
+        - entity: scene.nightlight_in_kitchen
+    #######################
+    #     Living Room     #
+    #######################
+      - title: Living Room
+        type: entities
+        entities:
+        - name: Main Lamp
+          type: custom:slider-entity-row
+          entity: light.main_living_room_lamp
+          toggle: true
+        - name: Couch Light
+          type: custom:slider-entity-row
+          entity: light.couch_light
+          toggle: true
+        - name: Couch RGB
+          type: custom:slider-entity-row
+          entity: light.couch_rgb
+          toggle: true
+        - name: TV RGB
+          type: custom:slider-entity-row
+          entity: light.tv_rgb
+          toggle: true
+        - entity: switch.christmas_tree_light
+        - entity: group.living_room_rgb
+        - entity: scene.bright_in_living_room
+        - entity: scene.spring_blossom_in_living_room
+        - entity: scene.tropical_twilight_in_living_room
+        - entity: scene.savanna_sunset_in_living_room
+        - entity: scene.arctic_aurora_in_living_room
+        - entity: scene.dimmed_in_living_room
+        - entity: scene.nightlight_in_living_room
+    ########################
+    #     Laundry Room     #
+    ########################
+      - title: Laundry Room
+        type: entities
+        entities:
+          - entity: switch.laundry_fan
+          - entity: switch.laundryroomfan
+    ####################
+    #     Bathroom     #
+    ####################
+      - title: Bathroom
+        type: entities
+        entities:
+        - name: Main Bathroom Light
+          type: custom:slider-entity-row
+          entity: light.main_bathroom_light
+          toggle: true
+        - entity: switch.bathroom_fan
+    ################
+    #     Desk     #
+    ################  
+      - title: Desk
+        type: entities
+        entities:
+        - name: Desk LED
+          type: custom:slider-entity-row
+          entity: light.desk_light
+          toggle: true
+        - entity: switch.laptop
+        - entity: scene.working_at_desk
+        - entity: scene.spring_blossom_at_desk
+        - entity: scene.tropical_twilight_at_desk
+        - entity: scene.savanna_sunset_at_desk
+        - entity: scene.arctic_aurora_at_desk
+        - entity: scene.dimmed_at_desk
+        - entity: scene.nightlight_at_desk
+  ################################
+  #     Living Room Apple TV     #
+  ################################
+  - title: Watch Apple TV
+    path: watch_apple_tv
+    cards:
+      - title: Living Room Apple TV
+        type: entities
+        entities:
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:power
+                styles:
+                  icon:
+                    - color: green
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.living_room_apple_tv_on
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:power
+                styles:
+                  icon:
+                    - color: red
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.living_room_apple_tv_off
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:arrow-up-circle-outline
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.living_room_apple_tv_up
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:arrow-left-circle-outline
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.living_room_apple_tv_left
+                template: menu_button
+                type: 'custom:button-card'
+              - icon: mdi:circle-double
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.living_room_apple_tv_select
+                template: menu_button
+                type: 'custom:button-card'
+              - icon: mdi:arrow-right-circle-outline
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.living_room_apple_tv_right
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:arrow-down-circle-outline
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.living_room_apple_tv_down
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:chevron-left
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.living_room_apple_tv_back
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:monitor-screenshot
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.living_room_apple_tv_home
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:play-pause
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.living_room_apple_tv_back
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:volume-plus
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.living_room_tv_vol_up
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:volume-off
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.living_room_tv_mute
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:volume-minus
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.living_room_tv_vol_down
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:television-box
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.living_room_tv_live
+                template: menu_button
+                type: 'custom:button-card'
+              - icon: mdi:menu-down
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.living_room_tv_ch_down
+                template: menu_button
+                type: 'custom:button-card'
+              - icon: mdi:menu-up
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.living_room_tv_ch_up
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'
+  ################################
+  #     Bedroom Fire TV     #
+  ################################
+  - title: Watch Fire TV
+    path: watch_fire_tv
+    cards:
+      - title: Bedroom Fire TV
+        type: entities
+        entities:
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:power
+                styles:
+                  icon:
+                    - color: green
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_apple_tv_on
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:power
+                styles:
+                  icon:
+                    - color: red
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_apple_tv_off
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:arrow-up-circle-outline
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_apple_tv_up
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:arrow-left-circle-outline
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_apple_tv_left
+                template: menu_button
+                type: 'custom:button-card'
+              - icon: mdi:circle-double
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_apple_tv_select
+                template: menu_button
+                type: 'custom:button-card'
+              - icon: mdi:arrow-right-circle-outline
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_apple_tv_right
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:arrow-down-circle-outline
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_apple_tv_down
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:chevron-left
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_apple_tv_back
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:monitor-screenshot
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_apple_tv_home
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:play-pause
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_apple_tv_back
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:volume-plus
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_tv_vol_up
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:volume-off
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_tv_mute
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:volume-minus
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_tv_vol_down
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:television-box
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_tv_live
+                template: menu_button
+                type: 'custom:button-card'
+              - icon: mdi:menu-down
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_tv_ch_down
+                template: menu_button
+                type: 'custom:button-card'
+              - icon: mdi:menu-up
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_tv_ch_up
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'

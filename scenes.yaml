@@ -1,0 +1,450 @@
+- id: "1593665771904"
+  name: Cooking in Kitchen
+  entities:
+    light.kitchen_cabinet_light:
+      brightness: 255
+      color_temp: 57867
+      effect: none
+      effect_list:
+        - colorloop
+        - random
+      friendly_name: Kitchen Cabinet Light
+      max_mireds: 65535
+      min_mireds: 153
+      state: "on"
+      supported_features: 63
+- id: "1593800561958"
+  name: Spring Blossom in Kitchen
+  entities:
+    light.kitchen_cabinet_light:
+      brightness: 215
+      effect: none
+      effect_list:
+        - colorloop
+        - random
+      friendly_name: Kitchen Cabinet Light
+      hs_color:
+        - 338.333
+        - 28.235
+      max_mireds: 65535
+      min_mireds: 153
+      rgb_color:
+        - 255
+        - 183
+        - 209
+      state: "on"
+      supported_features: 63
+      xy_color:
+        - 0.394
+        - 0.295
+- id: "1593800610319"
+  name: Tropical Twilight in Kitchen
+  entities:
+    light.kitchen_cabinet_light:
+      brightness: 124
+      effect: none
+      effect_list:
+        - colorloop
+        - random
+      friendly_name: Kitchen Cabinet Light
+      hs_color:
+        - 263.448
+        - 34.118
+      max_mireds: 65535
+      min_mireds: 153
+      rgb_color:
+        - 201
+        - 167
+        - 255
+      state: "on"
+      supported_features: 63
+      xy_color:
+        - 0.291
+        - 0.225
+- id: "1593800676874"
+  name: Savanna Sunset in Kitchen
+  entities:
+    light.kitchen_cabinet_light:
+      brightness: 200
+      effect: none
+      effect_list:
+        - colorloop
+        - random
+      friendly_name: Kitchen Cabinet Light
+      hs_color:
+        - 47.425
+        - 65.49
+      max_mireds: 65535
+      min_mireds: 153
+      rgb_color:
+        - 255
+        - 219
+        - 88
+      state: "on"
+      supported_features: 63
+      xy_color:
+        - 0.465
+        - 0.448
+- id: "1593800733550"
+  name: Dimmed in Kitchen
+  entities:
+    light.kitchen_cabinet_light:
+      brightness: 76
+      color_temp: 367
+      effect: none
+      effect_list:
+        - colorloop
+        - random
+      friendly_name: Kitchen Cabinet Light
+      max_mireds: 65535
+      min_mireds: 153
+      state: "on"
+      supported_features: 63
+- id: "1593800821410"
+  name: Arctic Aurora in Kitchen
+  entities:
+    light.kitchen_cabinet_light:
+      brightness: 139
+      effect: none
+      effect_list:
+        - colorloop
+        - random
+      friendly_name: Kitchen Cabinet Light
+      hs_color:
+        - 200.448
+        - 87.451
+      max_mireds: 65535
+      min_mireds: 153
+      rgb_color:
+        - 31
+        - 179
+        - 255
+      state: "on"
+      supported_features: 63
+      xy_color:
+        - 0.149
+        - 0.219
+- id: "1593800855991"
+  name: Nightlight in Kitchen
+  entities:
+    light.kitchen_cabinet_light:
+      brightness: 1
+      effect: none
+      effect_list:
+        - colorloop
+        - random
+      friendly_name: Kitchen Cabinet Light
+      hs_color:
+        - 33.767
+        - 84.314
+      max_mireds: 65535
+      min_mireds: 153
+      rgb_color:
+        - 255
+        - 160
+        - 39
+      state: "on"
+      supported_features: 63
+      xy_color:
+        - 0.561
+        - 0.404
+- id: working_at_desk
+  name: Working at Desk
+  entities:
+    light.desk_light:
+      brightness: 255
+      color_temp: 57867
+      effect: none
+      effect_list:
+        - colorloop
+        - random
+      friendly_name: Desk LED
+      max_mireds: 65535
+      min_mireds: 153
+      state: "on"
+      supported_features: 63
+- id: spring_blossom_desk
+  name: Spring Blossom at Desk
+  entities:
+    light.desk_light:
+      brightness: 200
+      color_temp: 321
+      effect_list:
+        - colorloop
+      friendly_name: Desk LED
+      hs_color:
+        - 270
+        - 57.143
+      max_mireds: 500
+      min_mireds: 153
+      off_brightness:
+      rgb_color:
+        - 182
+        - 109
+        - 255
+      state: "on"
+      supported_features: 63
+      xy_color:
+        - 0.279
+        - 0.159
+- id: tropical_twilight_desk
+  name: Tropical Twilight at Desk
+  entities:
+    light.desk_light:
+      brightness: 124
+      effect: none
+      effect_list:
+        - colorloop
+        - random
+      friendly_name: Desk LED
+      hs_color:
+        - 263.448
+        - 34.118
+      max_mireds: 65535
+      min_mireds: 153
+      rgb_color:
+        - 201
+        - 167
+        - 255
+      state: "on"
+      supported_features: 63
+      xy_color:
+        - 0.291
+        - 0.225
+- id: savanna_sunset_desk
+  name: Savanna Sunset at Desk
+  entities:
+    light.desk_light:
+      brightness: 200
+      effect: none
+      effect_list:
+        - colorloop
+        - random
+      friendly_name: Desk LED
+      hs_color:
+        - 47.425
+        - 65.49
+      max_mireds: 65535
+      min_mireds: 153
+      rgb_color:
+        - 255
+        - 219
+        - 88
+      state: "on"
+      supported_features: 63
+      xy_color:
+        - 0.465
+        - 0.448
+- id: dimmed_desk
+  name: Dimmed at Desk
+  entities:
+    light.desk_light:
+      brightness: 76
+      color_temp: 367
+      effect: none
+      effect_list:
+        - colorloop
+        - random
+      friendly_name: Desk LED
+      max_mireds: 65535
+      min_mireds: 153
+      state: "on"
+      supported_features: 63
+- id: arctic_aurora_desk
+  name: Arctic Aurora at Desk
+  entities:
+    light.desk_light:
+      brightness: 139
+      effect: none
+      effect_list:
+        - colorloop
+        - random
+      friendly_name: Desk LED
+      hs_color:
+        - 200.448
+        - 87.451
+      max_mireds: 65535
+      min_mireds: 153
+      rgb_color:
+        - 31
+        - 179
+        - 255
+      state: "on"
+      supported_features: 63
+      xy_color:
+        - 0.149
+        - 0.219
+- id: nightlight_desk
+  name: Nightlight at Desk
+  entities:
+    light.desk_light:
+      brightness: 1
+      effect: none
+      effect_list:
+        - colorloop
+        - random
+      friendly_name: Desk LED
+      hs_color:
+        - 33.767
+        - 84.314
+      max_mireds: 65535
+      min_mireds: 153
+      rgb_color:
+        - 255
+        - 160
+        - 39
+      state: "on"
+      supported_features: 63
+      xy_color:
+        - 0.561
+        - 0.404
+- id: bright_livingroom_rgb
+  name: Bright in Living Room
+  entities:
+    group.living_room_rgb:
+      brightness: 255
+      color_temp: 305
+      effect: none
+      effect_list:
+        - colorloop
+        - random
+      friendly_name: Living Room RGB
+      max_mireds: 555
+      min_mireds: 153
+      state: "on"
+      supported_features: 63
+- id: spring_blossom_livingroom_rgb
+  name: Spring Blossom in Living Room
+  entities:
+    group.living_room_rgb:
+      brightness: 200
+      effect: none
+      effect_list:
+        - colorloop
+        - random
+      friendly_name: Living Room RGB
+      hs_color:
+        - 338.333
+        - 28.235
+      max_mireds: 65535
+      min_mireds: 153
+      rgb_color:
+        - 255
+        - 183
+        - 209
+      state: "on"
+      supported_features: 63
+      xy_color:
+        - 0.394
+        - 0.295
+- id: tropical_twilight_livingroom_rgb
+  name: Tropical Twilight in Living Room
+  entities:
+    group.living_room_rgb:
+      brightness: 124
+      effect: none
+      effect_list:
+        - colorloop
+        - random
+      friendly_name: Living Room RGB
+      hs_color:
+        - 263.448
+        - 34.118
+      max_mireds: 65535
+      min_mireds: 153
+      rgb_color:
+        - 201
+        - 167
+        - 255
+      state: "on"
+      supported_features: 63
+      xy_color:
+        - 0.291
+        - 0.225
+- id: savanna_sunset_livingroom_rgb
+  name: Savanna Sunset in Living Room
+  entities:
+    group.living_room_rgb:
+      brightness: 200
+      effect: none
+      effect_list:
+        - colorloop
+        - random
+      friendly_name: Living Room RGB
+      hs_color:
+        - 47.425
+        - 65.49
+      max_mireds: 65535
+      min_mireds: 153
+      rgb_color:
+        - 255
+        - 219
+        - 88
+      state: "on"
+      supported_features: 63
+      xy_color:
+        - 0.465
+        - 0.448
+- id: dimmed_livingroom_rgb
+  name: Dimmed in Living Room
+  entities:
+    group.living_room_rgb:
+      brightness: 76
+      color_temp: 367
+      effect: none
+      effect_list:
+        - colorloop
+        - random
+      friendly_name: Living Room RGB
+      max_mireds: 65535
+      min_mireds: 153
+      state: "on"
+      supported_features: 63
+- id: arctic_aurora_livingroom_rgb
+  name: Arctic Aurora in Living Room
+  entities:
+    group.living_room_rgb:
+      brightness: 139
+      effect: none
+      effect_list:
+        - colorloop
+        - random
+      friendly_name: Living Room RGB
+      hs_color:
+        - 200.448
+        - 87.451
+      max_mireds: 65535
+      min_mireds: 153
+      rgb_color:
+        - 31
+        - 179
+        - 255
+      state: "on"
+      supported_features: 63
+      xy_color:
+        - 0.149
+        - 0.219
+- id: nightlight_livingroom_rgb
+  name: Nightlight in Living Room
+  entities:
+    group.living_room_rgb:
+      brightness: 1
+      effect: none
+      effect_list:
+        - colorloop
+        - random
+      friendly_name: Living Room RGB
+      hs_color:
+        - 33.767
+        - 84.314
+      max_mireds: 65535
+      min_mireds: 153
+      rgb_color:
+        - 255
+        - 160
+        - 39
+      state: "on"
+      supported_features: 63
+      xy_color:
+        - 0.561
+        - 0.404
