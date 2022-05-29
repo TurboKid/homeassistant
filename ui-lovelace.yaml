@@ -76,24 +76,24 @@ views:
         entities:
         - group.all_lights
         - light.main_kitchen_light
-        - light.kitchen_cabinet_light
+        - light.1kitchen_cabinet_light
         - light.main_dining_room_light
         - switch.occulus_light
         - switch.living_room_watch_apple_tv
         - light.main_living_room_lamp
-        - light.couch_light
+        - light.1couch_light
         - light.couch_rgb
         - light.tv_rgb
         - switch.christmas_tree_light
         - switch.living_room_watch_fire_tv_bedroom
-        - light.joes_light
-        - light.shirleys_light
-        - switch.led_string_lights
+        - light.1joes_light
+        - light.1shirleys_light
+        - light.led_string_lights
         - switch.bedroom_closet
         - switch.laundry_fan
-        - light.main_bathroom_light
+        - light.bathroom_main_light
         - switch.bathroom_fan
-        - light.desk_light
+        - light.1desk_light
         - switch.laptop
     ###################
     #     Bedroom     #
@@ -104,13 +104,13 @@ views:
         - entity: group.bedroom_lights
         - name: Joes Light
           type: custom:slider-entity-row
-          entity: light.joes_light
+          entity: light.1joes_light
           toggle: true
         - name: Shirley's Light
           type: custom:slider-entity-row
-          entity: light.shirleys_light
+          entity: light.1shirleys_light
           toggle: true
-        - entity: switch.led_string_lights
+        - entity: light.led_string_lights
         - entity: switch.bedroomrgb
         - entity: switch.bedroom_closet
     #######################
@@ -133,7 +133,7 @@ views:
         - entity: light.garbage_disposal
         - name: Under Cabinet Light
           type: custom:slider-entity-row
-          entity: light.kitchen_cabinet_light
+          entity: light.1kitchen_cabinet_light
           toggle: true
         - name: Main Kitchen Light
           type: custom:slider-entity-row
@@ -158,7 +158,7 @@ views:
           toggle: true
         - name: Couch Light
           type: custom:slider-entity-row
-          entity: light.couch_light
+          entity: light.1couch_light
           toggle: true
         - name: Couch RGB
           type: custom:slider-entity-row
@@ -191,9 +191,17 @@ views:
       - title: Bathroom
         type: entities
         entities:
+        - name: Air temperature
+          entity: sensor.bathroom_sensor_air_temperature
+        - name: Motion detection
+          entity: binary_sensor.bathroom_sensor_motion
+        - name: Humidity
+          entity: sensor.bathroom_sensor_humidity
+        - name: Illuminance
+          entity: sensor.bathroom_sensor_illuminance
         - name: Main Bathroom Light
           type: custom:slider-entity-row
-          entity: light.main_bathroom_light
+          entity: light.bathroom_main_light
           toggle: true
         - entity: switch.bathroom_fan
     ################
@@ -204,7 +212,7 @@ views:
         entities:
         - name: Desk LED
           type: custom:slider-entity-row
-          entity: light.desk_light
+          entity: light.1desk_light
           toggle: true
         - entity: switch.laptop
         - entity: scene.working_at_desk

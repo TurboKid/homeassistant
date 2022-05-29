@@ -8,26 +8,26 @@ bedroom_lights:
   name: Bedroom Lights
   icon: mdi:lightbulb-group-outline
   entities:
-    - light.joes_light
-    - light.shirleys_light
+    - light.1joes_light
+    - light.1shirleys_light
 all_lights:
   name: All Lights
   icon: mdi:lightbulb-group-outline
   entities:
     - light.main_kitchen_light
-    - light.kitchen_cabinet_light
+    - light.1kitchen_cabinet_light
     - light.main_dining_room_light
     - switch.occulus_light
     - light.main_living_room_lamp
-    - light.couch_light
+    - light.1couch_light
     - light.couch_rgb
     - light.tv_rgb
-    - switch.christmas_tree_light
+    - light.christmas_tree_light
     - light.joes_light
     - light.shirleys_light
-    - switch.led_string_lights
+    - light.led_string_lights
     - switch.bedroomrgb
     - light.main_bathroom_light
     - switch.bathroom_fan
-    - light.desk_light
+    - light.1desk_light
     - switch.laptop

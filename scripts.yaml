@@ -147,32 +147,40 @@ bedroom_fire_tv_on:
   description: Power on the Living Room Apple TV
   sequence:
   - service: remote.send_command
+    target:
+        entity_id: remote.living_room
     data:
-      entity_id: remote.living_room
-      command: PowerOn
-      device: 66670702
+      command: 
+        - PowerOn
+      device: "Samsung TV Bedroom"
   #- delay: 4
   - service: remote.send_command
-    data:
+    target:
       entity_id: remote.living_room
-      command: Home
-      device: 66670724
+    data:
+      command: 
+        - Home
+      device: "Fire Stick Bedroom"
 
 bedroom_fire_tv_off:
   alias: Bedroom TV Off
   description: Power off the Living Room Apple TV
   sequence:
   - service: remote.send_command
-    data:
+    target:
       entity_id: remote.living_room
-      command: Home
-      device: 66670724
+    data:
+      command: 
+        - Home
+      device: "Fire Stick Bedroom"
   - delay: 1
   - service: remote.send_command
+    target:
+        entity_id: remote.living_room
     data:
-      entity_id: remote.living_room
-      command: PowerOff
-      device: 66670702
+      command: 
+        - PowerOn
+      device: "Samsung TV Bedroom"
 
 bedroom_tv_vol_up:
   sequence:
@@ -314,3 +322,17 @@ laundry_room_fan_on:
       service: light.turn_off
       target:
         entity_id: switch.laundry_fan
+
+living_room_tv_power_cycle:
+    alias: Living Room TV Power Cycle
+    description: 'Turns Living Room TV Off and back On again after 10 seconds'
+    sequence:
+        - alias: Turn TV Off
+          service: homeassistant.turn_off
+          data:
+            entity_id: switch.living_room_tv_power
+        - delay: '00:00:10'
+        - alias: "Turn TV On"
+          service: homeassistant.turn_on
+          target:
+              entity_id: switch.living_room_tv_power

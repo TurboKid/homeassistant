@@ -5,6 +5,17 @@ default_config:
 tts:
   - platform: google_translate
 
+#################################
+#     HTTP for Reverse Proxy    #
+#################################
+#http:
+  #ssl_certificate: /ssl/fullchain.pem
+  #ssl_key: /ssl/privkey.pem
+  #use_x_forwarded_for: true
+  #trusted_proxies:
+    #- 192.168.1.240
+    #- 192.168.1.0/24
+
 #########################
 #     Input Booleans    #
 #########################
@@ -16,6 +27,15 @@ input_boolean:
     name: "Bathroom Light"
     initial: off
 
+#########################
+#     Binary Sensors    #
+#########################
+binary_sensor:
+  - platform: ping
+    host: 192.168.1.226
+    scan_interval: 20
+    name: living_tv_status
+
 
 #############################
 #     Customize Switches    #
@@ -26,7 +46,7 @@ switch:
       bedroomrgb:
         turn_on:
           service: remote.send_command
-          target: 
+          target:
             entity_id: remote.living_room
           data:
             command:
@@ -34,7 +54,7 @@ switch:
             device: 66670926
         turn_off:
           service: remote.send_command
-          target: 
+          target:
             entity_id: remote.living_room
           data:
             command:
@@ -77,7 +97,7 @@ homeassistant:
     light.main_kitchen_light:
       friendly_name: Main Kitchen Light
       icon: mdi:dome-light
-    light.kitchen_cabinet_light:
+    light.1kitchen_cabinet_light:
       friendly_name: Kitchen Cabinet Light
       icon: mdi:led-strip-variant
     light.garbage_disposal:
@@ -98,6 +118,9 @@ homeassistant:
     media_player.living_room:
       friendly_name: Sonos Living Room
       icon: mdi:disc-player
+    switch.living_room_tv_power:
+        friendly_name: Living Room TV Power
+        icon: mdi:television
     switch.living_room_watch_apple_tv:
       friendly_name: Watch Apple TV Living Room
       icon: mdi:youtube-tv
@@ -113,7 +136,7 @@ homeassistant:
     light.tv_rgb:
       friendly_name: TV RGB
       icon: mdi:lightbulb-on-outline
-    switch.christmas_tree_light:
+    light.christmas_tree_light:
       friendly_name: Christmas Tree Light
       icon: mdi:pine-tree
     ###################
@@ -122,13 +145,13 @@ homeassistant:
     switch.living_room_watch_fire_tv_bedroom:
       friendly_name: Watch Fire TV Bedroom
       icon: mdi:youtube-tv
-    light.joes_light:
+    light.1joes_light:
       friendly_name: Joes Light
       icon: mdi:lightbulb-outline
-    light.shirleys_light:
+    light.1shirleys_light:
       friendly_name: Shirleys Light
       icon: mdi:lightbulb-outline
-    switch.led_string_lights:
+    light.led_string_lights:
       friendly_name: LED String Lights
       icon: mdi:string-lights
     switch.bedroomrgb:
@@ -149,7 +172,7 @@ homeassistant:
     ####################
     #     Bathroom     #
     ####################
-    light.main_bathroom_light:
+    light.bathroom_main_light:
       friendly_name: Main Bathroom Light
       icon: mdi:vanity-light
     switch.bathroom_fan:
@@ -161,7 +184,7 @@ homeassistant:
     ################
     #     Desk     #
     ################
-    light.desk_light:
+    light.1desk_light:
       friendly_name: Desk Light
       icon: mdi:led-strip-variant
     switch.laptop:
@@ -186,6 +209,8 @@ lovelace:
       type: module
     - url: /hacsfiles/lovelace-hui-element/hui-element.js
       type: module
+    - url: /local/state-switch.js
+      type: module
 
 #zwave:
 #usb_path: /dev/zwave
@@ -194,7 +219,7 @@ lovelace:
 ##########################
 #     Google Calendar    #
 ##########################
-google: 
+google:
   client_id: !secret google_client_id_calendar
   client_secret: !secret google_client_secret_calendar
 

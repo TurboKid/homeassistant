@@ -1,7 +1,7 @@
 - id: "1593665771904"
   name: Cooking in Kitchen
   entities:
-    light.kitchen_cabinet_light:
+    light.1kitchen_cabinet_light:
       brightness: 255
       color_temp: 57867
       effect: none
@@ -16,7 +16,7 @@
 - id: "1593800561958"
   name: Spring Blossom in Kitchen
   entities:
-    light.kitchen_cabinet_light:
+    light.1kitchen_cabinet_light:
       brightness: 215
       effect: none
       effect_list:
@@ -40,7 +40,7 @@
 - id: "1593800610319"
   name: Tropical Twilight in Kitchen
   entities:
-    light.kitchen_cabinet_light:
+    light.1kitchen_cabinet_light:
       brightness: 124
       effect: none
       effect_list:
@@ -64,7 +64,7 @@
 - id: "1593800676874"
   name: Savanna Sunset in Kitchen
   entities:
-    light.kitchen_cabinet_light:
+    light.1kitchen_cabinet_light:
       brightness: 200
       effect: none
       effect_list:
@@ -88,7 +88,7 @@
 - id: "1593800733550"
   name: Dimmed in Kitchen
   entities:
-    light.kitchen_cabinet_light:
+    light.1kitchen_cabinet_light:
       brightness: 76
       color_temp: 367
       effect: none
@@ -103,7 +103,7 @@
 - id: "1593800821410"
   name: Arctic Aurora in Kitchen
   entities:
-    light.kitchen_cabinet_light:
+    light.1kitchen_cabinet_light:
       brightness: 139
       effect: none
       effect_list:
@@ -127,7 +127,7 @@
 - id: "1593800855991"
   name: Nightlight in Kitchen
   entities:
-    light.kitchen_cabinet_light:
+    light.1kitchen_cabinet_light:
       brightness: 1
       effect: none
       effect_list:
@@ -151,7 +151,7 @@
 - id: working_at_desk
   name: Working at Desk
   entities:
-    light.desk_light:
+    light.1desk_light:
       brightness: 255
       color_temp: 57867
       effect: none
@@ -166,7 +166,7 @@
 - id: spring_blossom_desk
   name: Spring Blossom at Desk
   entities:
-    light.desk_light:
+    light.1desk_light:
       brightness: 200
       color_temp: 321
       effect_list:
@@ -190,7 +190,7 @@
 - id: tropical_twilight_desk
   name: Tropical Twilight at Desk
   entities:
-    light.desk_light:
+    light.1desk_light:
       brightness: 124
       effect: none
       effect_list:
@@ -214,7 +214,7 @@
 - id: savanna_sunset_desk
   name: Savanna Sunset at Desk
   entities:
-    light.desk_light:
+    light.1desk_light:
       brightness: 200
       effect: none
       effect_list:
@@ -238,7 +238,7 @@
 - id: dimmed_desk
   name: Dimmed at Desk
   entities:
-    light.desk_light:
+    light.1desk_light:
       brightness: 76
       color_temp: 367
       effect: none
@@ -253,7 +253,7 @@
 - id: arctic_aurora_desk
   name: Arctic Aurora at Desk
   entities:
-    light.desk_light:
+    light.1desk_light:
       brightness: 139
       effect: none
       effect_list:
@@ -277,7 +277,7 @@
 - id: nightlight_desk
   name: Nightlight at Desk
   entities:
-    light.desk_light:
+    light.1desk_light:
       brightness: 1
       effect: none
       effect_list:
