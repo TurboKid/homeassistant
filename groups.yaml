@@ -2,32 +2,43 @@ living_room_rgb:
   name: Living Room RGB
   icon: mdi:lightbulb-group-outline
   entities:
-    - light.couch_rgb
-    - light.tv_rgb
+    - light.couch_rgb_on_off
+    - light.tv_rgb_on_off
+    - group.ikea_column
 bedroom_lights:
   name: Bedroom Lights
   icon: mdi:lightbulb-group-outline
   entities:
-    - light.1joes_light
-    - light.1shirleys_light
+    - light.joes_light_on_off
+    - light.shirleys_light_on_off
 all_lights:
   name: All Lights
   icon: mdi:lightbulb-group-outline
   entities:
     - light.main_kitchen_light
-    - light.1kitchen_cabinet_light
+    - light.kitchen_cabinet_light
     - light.main_dining_room_light
-    - switch.occulus_light
-    - light.main_living_room_lamp
-    - light.1couch_light
-    - light.couch_rgb
-    - light.tv_rgb
-    - light.christmas_tree_light
-    - light.joes_light
-    - light.shirleys_light
-    - light.led_string_lights
+    - switch.oculus_light_on_off
+    - switch.nasa_lava_lamp
+    - light.main_living_room_light
+    - light.couch_light_on_off
+    - light.couch_rgb_on_off
+    - light.tv_rgb_on_off
+    - switch.tetris_light_on_off
+    - group.ikea_column
+    - light.joes_light_on_off
+    - light.shirleys_light_on_off
+    - switch.bedroom_led_string
     - switch.bedroomrgb
+    - switch.bedroom_closet_light_on_off
     - light.main_bathroom_light
-    - switch.bathroom_fan
-    - light.1desk_light
-    - switch.laptop
+    - switch.bathroom_fan_on_off
+    - light.desk_light
+    - switch.laptop_on_off
+ikea_column:
+  name: Ikea Column
+  icon: mdi:database-outline
+  entities:
+    - light.ikea_column_light_01
+    - light.ikea_column_light_02
+    - light.ikea_column_light_03

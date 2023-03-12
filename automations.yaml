@@ -5,6 +5,7 @@
   - platform: state
     entity_id: binary_sensor.bathroom_sensor_motion
     to: 'on'
+    from: 'off'
   condition:
   - condition: or
     conditions:
@@ -14,39 +15,231 @@
     - condition: state
       entity_id: input_boolean.bathroom_light_turned_by_motion
       state: 'on'
-  action:
-  - service: homeassistant.turn_on
-    target:
+    - condition: state
+      entity_id: input_boolean.bathroom_light_turned_by_motion
+      state: 'off'
+    - condition: state
       entity_id: light.bathroom_main_light
+      state: 'on'
+  action:
+  - service: light.turn_on
+    data: {}
+    target:
+      device_id: cbc75040c51fd8153acd8b386f0d9bea
   - service: homeassistant.turn_on
     target:
       entity_id: input_boolean.bathroom_light_turned_by_motion
+    data: {}
   - wait_template: ''
-    timeout: 00:05:00
+    timeout: 00:20:00
+    continue_on_timeout: true
+  - service: light.turn_off
+    data: {}
+    target:
+      device_id: cbc75040c51fd8153acd8b386f0d9bea
+  - service: homeassistant.turn_off
+    target:
+      entity_id: input_boolean.bathroom_light_turned_by_motion
+    data: {}
+  mode: restart
+- id: '1528154324462'
+  alias: Turn Farmstand Lights ON
+  description: ''
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: -01:00:00
+  action:
+  - service: light.turn_on
+    entity_id: light.farmstand_light
+- id: '1689246583258'
+  alias: Turn Farmstand Lights OFF
+  description: ''
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: -02:00:00
+  action:
+  - service: light.turn_off
+    entity_id: light.farmstand_light
+- id: '1372674793218'
+  alias: Farmstand Water Schedule
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: light.farmstand_light
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: light.farmstand_light
+    state: 'off'
+  action:
+  - alias: Repeat the sequence UNTIL Farmstand Light is OFF
+    repeat:
+      sequence:
+      - service: script.farmstand_daytime_pump_runtime
+      until:
+      - condition: state
+        entity_id: light.farmstand_light
+        state: 'off'
+  mode: single
+- id: '3546457421461'
+  alias: Motion Bedroom Closet
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.bedroom_closet_sensor_motion
+    to: 'on'
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: switch.bedroom_closet_light_on_off
+      state: 'off'
+    - condition: state
+      entity_id: input_boolean.bedroom_closet_light_turned_by_motion
+      state: 'on'
+  action:
+  - service: homeassistant.turn_on
+    target:
+      entity_id: switch.bedroom_closet_light_on_off
+    data: {}
+  - service: homeassistant.turn_on
+    target:
+      entity_id: input_boolean.bedroom_closet_light_turned_by_motion
+    data: {}
+  - wait_template: ''
+    timeout: 00:15:00
     continue_on_timeout: true
   - service: homeassistant.turn_off
     target:
-      entity_id: light.bathroom_main_light
+      entity_id: switch.bedroom_closet_light_on_off
+    data: {}
   - service: homeassistant.turn_off
     target:
-      entity_id: input_boolean.bathroom_light_turned_by_motion
+      entity_id: input_boolean.bedroom_closet_light_turned_by_motion
+    data: {}
   mode: restart
-
-- id: '1573007973743'
-  alias: Bathroom Fan On
+- id: '4267826942838'
+  alias: Detect Bedroom Dyson On
   description: ''
   trigger:
-  - above: 50
-    entity_id: sensor.bathroom_sensor_relative_humidity_measurement
-    platform: numeric_state
-  - event: start
-    platform: homeassistant
+  - platform: numeric_state
+    entity_id: sensor.bedroom_dyson_power_rms_current
+    above: 1
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 1
+      milliseconds: 0
   condition:
-  - above: 50
-    condition: numeric_state
-    entity_id: sensor.bathroom_sensor_relative_humidity_measurement
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: switch.bedroom_dyson_power_switch
+      state: 'on'
   action:
-  - device_id: 456c8971e6be46c8ae6f3a4d4a6eb014
+  - service: input_select.select_option
+    target:
+      entity_id: input_select.bedroom_dyson_power
+    data:
+      Option: Power On
+  mode: restart
+- id: '3686352875929'
+  alias: Detect Bedroom Dyson Off
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.bedroom_dyson_power_rms_current
+    below: 1
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: switch.bedroom_dyson_power_switch
+      state: 'on'
+  action:
+  - service: input_select.select_option
+    target:
+      entity_id: input_select.bedroom_dyson_power
+    data:
+      Option: Power Off
+  mode: restart
+- id: '1674591519796'
+  alias: Mushroom Bin Lights ON
+  description: ''
+  mode: restart
+  trigger:
+  - platform: time
+    at:
+    - 06:00:00
+    id: Simulate Sunrise
+  condition:
+  - condition: device
+    type: is_off
+    device_id: e98117c40b84701804164687d347ab08
+    entity_id: switch.shroom_bin_lights
     domain: switch
-    entity_id: switch.bathroomfan
-    type: turn_on
+  action:
+  - type: turn_on
+    device_id: e98117c40b84701804164687d347ab08
+    entity_id: switch.shroom_bin_lights
+    domain: switch
+- id: '1674591902494'
+  alias: Mushroom Bin Lights OFF
+  description: ''
+  mode: restart
+  trigger:
+  - platform: time
+    at:
+    - '18:00:00'
+    id: Simulate Sunset
+  condition:
+  - condition: device
+    type: is_on
+    device_id: e98117c40b84701804164687d347ab08
+    entity_id: switch.shroom_bin_lights
+    domain: switch
+  action:
+  - type: turn_off
+    device_id: e98117c40b84701804164687d347ab08
+    entity_id: switch.shroom_bin_lights
+    domain: switch
+- id: '1674595014860'
+  alias: Nasa Lava Lamp 6 Hour Timer
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 3b4dddd0730ff7f5838d25a3a159509f
+    domain: switch
+    type: turned_on
+    entity_id: switch.nasa_lava_lamp
+  condition:
+  - condition: state
+    entity_id: input_boolean.nasa_lava_lamp_timer
+    state: 'off'
+  action:
+  - service: homeassistant.turn_on
+    target:
+      entity_id:
+      - input_boolean.nasa_lava_lamp_timer
+    data: {}
+  - wait_template: ''
+    timeout: 00:00:30
+    continue_on_timeout: false
+    alias: Wait on  for 00:00:30
+    enabled: true
+  - type: turn_off
+    device_id: 3b4dddd0730ff7f5838d25a3a159509f
+    entity_id: switch.nasa_lava_lamp
+    domain: switch
+  - service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: input_boolean.nasa_lava_lamp_timer
+  mode: restart

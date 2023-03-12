@@ -1,3 +1,120 @@
+############################################
+#     Learn/Unlearn Broadlink Commands     #
+############################################
+learn_dyson_command:
+  sequence:
+    - service: remote.learn_command
+      target:
+        entity_id: remote.bedroom_bl_remote
+      data:
+        device: bedroom_dyson
+        command:
+          - Info
+
+delete_bedroom_led_commands:
+    sequence:
+      - service: remote.delete_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_led_string_lights
+          command:
+            - PowerOn
+
+#######################
+#     Living Room     #
+#######################
+living_room_tv_power_cycle:
+  alias: Living Room TV Power Cycle
+  description: Turns Living Room TV Off and back On again after 10 seconds
+  sequence:
+  - alias: Turn TV Off
+    service: homeassistant.turn_off
+    data:
+      entity_id: switch.living_room_tv_switch
+  - delay: 00:00:10
+  - alias: Turn TV On
+    service: homeassistant.turn_on
+    target:
+      entity_id: switch.living_room_tv_switch
+
+#######################################
+#     Living Room Apple TV Remote     #
+#######################################
+start_netflix:
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.living_room_apple_tv
+        command:
+          - menu
+    - delay: 00:00:03
+    - service: remote.send_command
+      data:
+        entity_id: remote.living_room_apple_tv
+        command:
+          - top_menu
+    - delay: 00:00:01            
+    - service: remote.send_command
+      data:
+        entity_id: remote.living_room_apple_tv
+        command:
+          - right
+          - select
+    - delay: 00:00:01
+    - service: remote.send_command
+      data:
+        entity_id: remote.living_room_apple_tv
+        command:
+          - select
+
+start_disneyplus:
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.living_room_apple_tv
+        command:
+          - menu
+    - delay: 00:00:03
+    - service: remote.send_command
+      data:
+        entity_id: remote.living_room_apple_tv
+        command:
+          - top_menu
+    - delay: 00:00:02            
+    - service: remote.send_command
+      data:
+        entity_id: remote.living_room_apple_tv
+        command:
+          - right
+          - right
+          - select
+    - delay: 00:00:08
+    - service: remote.send_command
+      data:
+        entity_id: remote.living_room_apple_tv
+        command:
+          - select
+    - delay: 00:00:02
+    - service: remote.send_command
+      data:
+        entity_id: remote.living_room_apple_tv
+        command:
+          - right
+          - right
+          - right
+          - right
+          - right
+          - select
+          - left
+          - left
+          - select
+          - right
+          - select
+          - right
+          - right
+          - select
+
 living_room_apple_tv_on:
   alias: Living Room TV On
   description: Power on the Living Room Apple TV
@@ -7,7 +124,6 @@ living_room_apple_tv_on:
       entity_id: remote.living_room
       command: Power On
       device: 49531715
-  #- delay: 4
   - service: remote.send_command
     data:
       entity_id: remote.living_room
@@ -31,6 +147,7 @@ living_room_apple_tv_off:
       device: 66670693
 
 living_room_apple_tv_up:
+  alias: Living Room Apple TV Up
   sequence:
     service: remote.send_command
     data:
@@ -39,6 +156,7 @@ living_room_apple_tv_up:
       device: 76529487
 
 living_room_apple_tv_down:
+  alias: Living Room Apple TV Down
   sequence:
     service: remote.send_command
     data:
@@ -47,6 +165,7 @@ living_room_apple_tv_down:
       device: 76529487
 
 living_room_apple_tv_select:
+  alias: Living Room Apple TV Select
   sequence:
     service: remote.send_command
     data:
@@ -55,6 +174,7 @@ living_room_apple_tv_select:
       device: 76529487
 
 living_room_apple_tv_left:
+  alias: Living Room Apple TV Left
   sequence:
     service: remote.send_command
     data:
@@ -63,6 +183,7 @@ living_room_apple_tv_left:
       device: 76529487
 
 living_room_apple_tv_right:
+  alias: Living Room Apple TV Right
   sequence:
     service: remote.send_command
     data:
@@ -71,6 +192,7 @@ living_room_apple_tv_right:
       device: 76529487
 
 living_room_apple_tv_home:
+  alias: Living Room Apple TV Home
   sequence:
     service: remote.send_command
     data:
@@ -79,14 +201,15 @@ living_room_apple_tv_home:
       device: 76529487
 
 living_room_apple_tv_back:
+  alias: Living Room Apple TV Back
   sequence:
     service: remote.send_command
     data:
       entity_id: remote.living_room
       command: Back
       device: 76529487
-
 living_room_apple_tv_play:
+  alias: Living Room Apple TV Play
   sequence:
     service: remote.send_command
     data:
@@ -95,6 +218,7 @@ living_room_apple_tv_play:
       device: 76529487
 
 living_room_tv_vol_up:
+  alias: Living Room TV Volume Up
   sequence:
     service: remote.send_command
     data:
@@ -103,6 +227,7 @@ living_room_tv_vol_up:
       device: 66670693
 
 living_room_tv_vol_down:
+  alias: Living Room TV Volume Down
   sequence:
     service: remote.send_command
     data:
@@ -111,6 +236,7 @@ living_room_tv_vol_down:
       device: 66670693
 
 living_room_tv_mute:
+  alias: Living Room TV Mute
   sequence:
     service: remote.send_command
     data:
@@ -119,6 +245,7 @@ living_room_tv_mute:
       device: 66670693
 
 living_room_tv_live:
+  alias: Living Room TV Live
   sequence:
     service: remote.send_command
     data:
@@ -127,6 +254,7 @@ living_room_tv_live:
       device: 66670693
 
 living_room_tv_ch_up:
+  alias: Living Room TV Channel Up
   sequence:
     service: remote.send_command
     data:
@@ -135,6 +263,7 @@ living_room_tv_ch_up:
       device: 66670693
 
 living_room_tv_ch_down:
+  alias: Living Room TV Channel Down
   sequence:
     service: remote.send_command
     data:
@@ -142,47 +271,441 @@ living_room_tv_ch_down:
       command: ChannelDown
       device: 66670693
 
-bedroom_fire_tv_on:
-  alias: Bedroom TV On
-  description: Power on the Living Room Apple TV
+
+###################
+#     Bedroom     #
+###################
+bedroom_rgb_on:
+  alias: Bedroom RGB On
+  sequence:
+  - service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: Power On
+      device: 66670926
+
+bedroom_rgb_off:
+  alias: Bedroom RGB Off
+  sequence:
+  - service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: Power Off
+      device: 66670926
+
+bedroom_led_on:
+  alias: Bedroom LED On
+  sequence:
+  - alias: Turn on Outlet
+    service: homeassistant.turn_on
+    data:
+      entity_id: switch.bedroom_led_string_lights_on_off
+  - delay: 00:00:02
+  - alias: Turn on LED Sequence
+    service: remote.send_command
+    target:
+      entity_id: remote.bedroom_bl_remote
+    data:
+        device: bedroom_led_string_lights
+        command: PowerOn
+  - delay: 00:00:02
+  - service: remote.send_command
+    target:
+      entity_id: remote.bedroom_bl_remote
+    data:
+        device: bedroom_led_string_lights
+        command: 2-InWave
+  - delay: 00:00:002
+  - service: remote.send_command
+    target:
+      entity_id: remote.bedroom_bl_remote
+    data:
+        device: bedroom_led_string_lights
+        command: 4-SloGlo
+  - delay: 00:05:00
+  - service: remote.send_command
+    target:
+      entity_id: remote.bedroom_bl_remote
+    data:
+        device: bedroom_led_string_lights
+        command: 6-SlowFade
+  - delay: 00:05:00
+  - service: remote.send_command
+    target:
+      entity_id: remote.bedroom_bl_remote
+    data:
+        device: bedroom_led_string_lights
+        command: 8-SteadyOn
+
+bedroom_led_off:
+  alias: Bedroom LED Off
+  sequence:
+  - alias: Turn off Outlet
+    service: homeassistant.turn_off
+    data:
+      entity_id: switch.bedroom_led_string_lights_on_off
+  - alias: Turn on LED Sequence
+    service: remote.send_command
+    target:
+      entity_id: remote.bedroom_bl_remote
+    data:
+        device: bedroom_led_string_lights
+        command: PowerOff
+
+bedroom_led_timer:
+  alias: Bedroom LED Timer
   sequence:
   - service: remote.send_command
     target:
-        entity_id: remote.living_room
+      entity_id: remote.bedroom_bl_remote
     data:
-      command: 
-        - PowerOn
-      device: "Samsung TV Bedroom"
-  #- delay: 4
+        device: bedroom_led_string_lights
+        command: Timer
+
+bedroom_led_combo:
+  alias: Bedroom LED Combo
+  sequence:
   - service: remote.send_command
     target:
-      entity_id: remote.living_room
+      entity_id: remote.bedroom_bl_remote
     data:
-      command: 
-        - Home
-      device: "Fire Stick Bedroom"
+        device: bedroom_led_string_lights
+        command: 1-Combination
+
+bedroom_led_inwave:
+  alias: Bedroom LED InWave
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.bedroom_bl_remote
+    data:
+        device: bedroom_led_string_lights
+        command: 2-InWave
+
+bedroom_led_sequential:
+  alias: Bedroom LED Timer
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.bedroom_bl_remote
+    data:
+        device: bedroom_led_string_lights
+        command: 3-Sequential
+
+bedroom_led_sloglo:
+  alias: Bedroom LED SloGlo
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.bedroom_bl_remote
+    data:
+        device: bedroom_led_string_lights
+        command: 4-SloGlo
+
+bedroom_led_chasingflash:
+  alias: Bedroom LED SloGlo
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.bedroom_bl_remote
+    data:
+        device: bedroom_led_string_lights
+        command: 5-Chasing/Flash
+
+bedroom_led_slowfade:
+  alias: Bedroom LED SloGlo
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.bedroom_bl_remote
+    data:
+        device: bedroom_led_string_lights
+        command: 6-SlowFade
+
+bedroom_led_twinkleflash:
+  alias: Bedroom LED SloGlo
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.bedroom_bl_remote
+    data:
+        device: bedroom_led_string_lights
+        command: 7-Twinkle/Flash
+
+bedroom_led_steadyon:
+  alias: Bedroom LED SloGlo
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.bedroom_bl_remote
+    data:
+        device: bedroom_led_string_lights
+        command: 8-SteadyOn
+
+bedroom_led_dim:
+  alias: Bedroom LED SloGlo
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.bedroom_bl_remote
+    data:
+        device: bedroom_led_string_lights
+        command: Dim
+
+bedroom_led_bright:
+  alias: Bedroom LED SloGlo
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.bedroom_bl_remote
+    data:
+        device: bedroom_led_string_lights
+        command: Bright
+
+living_room_tv_power_:
+  alias: Living Room TV Power Cycle
+  description: Turns Living Room TV Off and back On again after 10 seconds
+  sequence:
+  - alias: Turn TV Off
+    service: homeassistant.turn_off
+    data:
+      entity_id: switch.living_room_tv_power
+  - delay: 00:00:10
+  - alias: Turn TV On
+    service: homeassistant.turn_on
+    target:
+      entity_id: switch.living_room_tv_power
+
+##################################
+#     Bedroom Fire TV Remote     #
+##################################
+learn_bedroom_samsung:
+  sequence:
+    - service: remote.learn_command
+      target:
+        entity_id: remote.bedroom_bl_remote
+      data:
+        device: bedroom_samsung_tv
+        command:
+          - PowerOff
+          - PowerOn
+          - InputHDMI_1
+          - InputHDMI_2
+          - InputHDMI_3
+          - InputTV
+          - Mute
+          - VolumeDown
+          - VolumeUp
+          - LastChannel
+          - ChannelDown
+          - ChannelUp
+          - Menu
+          - MenuUp
+          - MenuLeft
+          - MenuOK
+          - MenuRight
+          - MenuDown
+          - Back
+
+bedroom_samsung_tv_off:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_samsung_tv
+          command: PowerOff
+
+bedroom_samsung_tv_on:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_samsung_tv
+          command: PowerOn
+
+bedroom_samsung_tv_hdmi1:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_samsung_tv
+          command: InputHDMI_1
+
+bedroom_samsung_tv_hdmi2:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_samsung_tv
+          command: InputHDMI_2
+
+bedroom_samsung_tv_hdmi3:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_samsung_tv
+          command: InputHDMI_3
+
+bedroom_samsung_tv_input_tv:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_samsung_tv
+          command: InputTV
+
+bedroom_samsung_tv_mute:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_samsung_tv
+          command: Mute
+
+bedroom_samsung_tv_volume_down:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_samsung_tv
+          command: VolumeDown
+
+bedroom_samsung_tv_volume_up:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_samsung_tv
+          command: VolumeUp
+
+bedroom_samsung_tv_last_channel:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_samsung_tv
+          command: LastChannel
+
+bedroom_samsung_tv_channel_down:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_samsung_tv
+          command: ChannelDown
+
+bedroom_samsung_tv_channel_up:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_samsung_tv
+          command: ChannelUp
+
+bedroom_samsung_tv_menu_up:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_samsung_tv
+          command: MenuUp
+
+bedroom_samsung_tv_menu:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_samsung_tv
+          command: Menu
+
+bedroom_samsung_tv_menu_ok:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_samsung_tv
+          command: MenuOk
+
+bedroom_samsung_tv_menu_right:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_samsung_tv
+          command: MenuRight
+
+bedroom_samsung_tv_menu_down:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_samsung_tv
+          command: MenuDown
+
+bedroom_samsung_tv_back:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_samsung_tv
+          command: Back
+
+bedroom_fire_tv_on:
+  alias: Bedroom Fire TV On
+  description: Power on the Bedroom Fire TV
+  sequence:
+  - service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: PowerOn
+      device: 66670702
+  - service: remote.send_command
+    data:
+      entity_id: remote.living_room
+      command: Home
+      device: 66670724
 
 bedroom_fire_tv_off:
   alias: Bedroom TV Off
-  description: Power off the Living Room Apple TV
+  description: Power on the Bedroom Fire TV
   sequence:
   - service: remote.send_command
     target:
       entity_id: remote.living_room
     data:
-      command: 
-        - Home
-      device: "Fire Stick Bedroom"
+      command:
+      - Home
+      device: Fire Stick Bedroom
   - delay: 1
   - service: remote.send_command
     target:
-        entity_id: remote.living_room
+      entity_id: remote.living_room
     data:
-      command: 
-        - PowerOn
-      device: "Samsung TV Bedroom"
+      command:
+      - PowerOff
+      device: Samsung TV Bedroom
 
 bedroom_tv_vol_up:
+  alias: Bedroom TV Volume Up
   sequence:
     service: remote.send_command
     data:
@@ -191,6 +714,7 @@ bedroom_tv_vol_up:
       device: 66670702
 
 bedroom_tv_vol_down:
+  alias: Bedroom TV Volume Down
   sequence:
     service: remote.send_command
     data:
@@ -199,6 +723,7 @@ bedroom_tv_vol_down:
       device: 66670702
 
 bedroom_tv_mute:
+  alias: Bedroom TV Mute
   sequence:
     service: remote.send_command
     data:
@@ -207,6 +732,7 @@ bedroom_tv_mute:
       device: 66670702
 
 bedroom_tv_live:
+  alias: Bedroom TV Live
   sequence:
     service: remote.send_command
     data:
@@ -215,6 +741,7 @@ bedroom_tv_live:
       device: 66670702
 
 bedroom_tv_ch_up:
+  alias: Bedroom TV Channel Up
   sequence:
     service: remote.send_command
     data:
@@ -223,6 +750,7 @@ bedroom_tv_ch_up:
       device: 66670702
 
 bedroom_tv_ch_down:
+  alias: Bedroom TV Channel Down
   sequence:
     service: remote.send_command
     data:
@@ -231,6 +759,7 @@ bedroom_tv_ch_down:
       device: 66670702
 
 bedroom_fire_tv_up:
+  alias: Bedroom Fire TV Up
   sequence:
     service: remote.send_command
     data:
@@ -239,6 +768,7 @@ bedroom_fire_tv_up:
       device: 66670724
 
 bedroom_fire_tv_down:
+  alias: Bedroom Fire TV Down
   sequence:
     service: remote.send_command
     data:
@@ -247,6 +777,7 @@ bedroom_fire_tv_down:
       device: 66670724
 
 bedroom_fire_tv_select:
+  alias: Bedroom Fire TV Select
   sequence:
     service: remote.send_command
     data:
@@ -255,14 +786,15 @@ bedroom_fire_tv_select:
       device: 66670724
 
 bedroom_fire_tv_left:
+  alias: Bedroom Fire TV Left
   sequence:
     service: remote.send_command
     data:
       entity_id: remote.living_room
       command: DirectionLeft
       device: 66670724
-
 bedroom_fire_tv_right:
+  alias: Bedroom Fire TV right
   sequence:
     service: remote.send_command
     data:
@@ -271,6 +803,7 @@ bedroom_fire_tv_right:
       device: 66670724
 
 bedroom_fire_tv_home:
+  alias: Bedroom Fire TV Home
   sequence:
     service: remote.send_command
     data:
@@ -279,6 +812,7 @@ bedroom_fire_tv_home:
       device: 66670724
 
 bedroom_fire_tv_back:
+  alias: Bedroom Fire TV Back
   sequence:
     service: remote.send_command
     data:
@@ -287,6 +821,7 @@ bedroom_fire_tv_back:
       device: 66670724
 
 bedroom_fire_tv_play:
+  alias: Bedroom Fire TV Play
   sequence:
     service: remote.send_command
     data:
@@ -294,45 +829,199 @@ bedroom_fire_tv_play:
       command: Play
       device: 66670724
 
-bathroom_fan_full_on:
-  sequence:
-    - alias: "Bathroom Fan On"
-      service: light.turn_on
-      target:
-        entity_id: switch.bathroom_fan
-    - delay: '00:00:01'
-    - alias: "Bathroom Fan Off"
-      service: light.turn_off
-      target:
-        entity_id: switch.bathroom_fan
-    - delay: '00:00:01'
-    - alias: "Bathroom Fan On"
-      service: light.turn_on
-      target:
-        entity_id: switch.bathroom_fan
-
-laundry_room_fan_on:
-  sequence:
-    - alias: "Laundry Fan On"
-      service: light.turn_on
-      target:
-        entity_id: switch.laundry_fan
-    - delay: '02:00:00'
-    - alias: "Laundry Room Fan Off"
-      service: light.turn_off
-      target:
-        entity_id: switch.laundry_fan
-
-living_room_tv_power_cycle:
-    alias: Living Room TV Power Cycle
-    description: 'Turns Living Room TV Off and back On again after 10 seconds'
+#########################
+#     Bedroom Dyson     #
+#########################
+bedroom_dyson_power:
     sequence:
-        - alias: Turn TV Off
-          service: homeassistant.turn_off
-          data:
-            entity_id: switch.living_room_tv_power
-        - delay: '00:00:10'
-        - alias: "Turn TV On"
-          service: homeassistant.turn_on
-          target:
-              entity_id: switch.living_room_tv_power
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_dyson
+          command: Power Toggle
+
+bedroom_dyson_fan_up:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_dyson
+          command: Fan Up
+
+bedroom_dyson_fan_down:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_dyson
+          command: Fan Down
+
+bedroom_dyson_heat_up:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_dyson
+          command: Heat Up
+
+bedroom_dyson_heat_down:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_dyson
+          command: Heat Down
+
+bedroom_dyson_auto:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_dyson
+          command: Auto
+
+bedroom_dyson_cool:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_dyson
+          command: Cool
+
+bedroom_dyson_oscillate:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_dyson
+          command: Oscillate
+
+bedroom_dyson_reverse:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_dyson
+          command: Reverse Mode
+
+bedroom_dyson_timer:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_dyson
+          command: Timer
+
+bedroom_dyson_sleep:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_dyson
+          command: Sleep
+
+bedroom_dyson_info:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.bedroom_bl_remote
+        data:
+          device: bedroom_dyson
+          command: Info
+
+####################
+#     Bathroom     #
+####################
+bathroom_fan_full_on:
+  alias: Bathroom Fan Full On
+  sequence:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id:
+      - switch.bathroom_fan_on_off
+  - delay: 00:00:01
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id:
+      - switch.bathroom_fan_on_off
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 1
+      milliseconds: 0
+  - service: switch.turn_on
+    data: {}
+    target:
+      device_id: b78ac02e3250d4ebcaf0b8c23e6e726d
+
+########################
+#     Laundry Room     #
+########################
+laundry_room_fan_on:
+  alias: Laundry Room Fan On
+  sequence:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id:
+      - switch.laundry_fan
+  - delay: 02:00:00
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id:
+      - switch.laundry_fan
+  mode: single
+
+###################
+#     Kitchen     #
+###################
+nasa_lava_lamp_on:
+  alias: Nasa Lava Lamp On
+  sequence:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id:
+      - switch.nasa_lava_lamp
+  - delay: 06:00:00
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id:
+      - switch.nasa_lava_lamp
+  mode: single
+
+flash_light:
+  mode: restart
+  sequence:
+    - service: light.turn_on
+      target:
+        entity_id: light.farmstand_pump
+    - alias: "Cycle Farmstand Pump 15 minutes on 45 minutes off"
+      repeat:
+        sequence:
+          - service: light.turn_on
+            target:
+              entity_id: "light.{{ light }}"
+
+flash_hallway_light:
+  sequence:
+    - alias: "Flash hallway light 3 times"
+      service: script.flash_light
+      data:
+        light: hallway
+        count: 3

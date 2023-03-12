@@ -9,23 +9,76 @@ tts:
 #     HTTP for Reverse Proxy    #
 #################################
 #http:
-  #ssl_certificate: /ssl/fullchain.pem
-  #ssl_key: /ssl/privkey.pem
+  #ssl_certificate: !secret ha_ssl_cert
+  #ssl_key: !secret ha_ssl_key
   #use_x_forwarded_for: true
   #trusted_proxies:
-    #- 192.168.1.240
-    #- 192.168.1.0/24
+    #- 192.168.1.222
 
 #########################
 #     Input Booleans    #
 #########################
 input_boolean:
+  bedroomrgb:
+    name: "Bedroom RGB Helper"
+    initial: off
+
   livingroomtvpower:
-    name: "Living Room TV"
+    name: "Living Room TV Helper"
     initial: off
+
   bathroom_light_turned_by_motion:
-    name: "Bathroom Light"
+    name: "Bathroom Light Helper"
     initial: off
+
+  bathroom_fan_full_on:
+    name: "Bathroom Fan Full On Helper"
+    initial: off
+
+  laundry_room_fan_timer:
+    name: "Laundry Room Fan 2 Hour Timer Helper"
+    initial: off
+
+  bedroom_closet_light_turned_by_motion:
+    name: "Bedroom Closet Light Helper"
+    initial: off
+
+  nasa_lava_lamp_timer:
+    name: "Nasa Lava Lamp 6 Hour Timer Helper"
+    initial: off
+    icon: mdi:rocket-outline
+
+  bedroom_led_string:
+    name: "Bedroom LED String Helper"
+    initial: off
+    icon: mdi:string-lights
+
+  bedroom_dyson_power:
+    name: "Bedroom Dyson Power Helper"
+    initial: off
+    icon: mdi:power
+
+########################
+#     Input Selects    #
+########################
+input_select:
+  bedroom_dyson_power:
+    name: "Bedroom Dyson Power Helper"
+    initial: Power Off
+    options:
+      - Power Off
+      - Power On
+      - Heat On
+
+########################
+#     Input Numbers    #
+########################
+#input_number:
+  #nasa_lava_lamp_timer:
+    #name: "Nasa Lava Lamp 6 Hour Timer"
+    #min: 0
+    #max: 360
+    #step: 60
 
 #########################
 #     Binary Sensors    #
@@ -36,7 +89,6 @@ binary_sensor:
     scan_interval: 20
     name: living_tv_status
 
-
 #############################
 #     Customize Switches    #
 #############################
@@ -44,41 +96,60 @@ switch:
   - platform: template
     switches:
       bedroomrgb:
+        value_template: "{{ is_state('input_boolean.bedroomrgb', 'on') }}"
         turn_on:
-          service: remote.send_command
-          target:
-            entity_id: remote.living_room
-          data:
-            command:
-              - Power On
-            device: 66670926
+          - service: input_boolean.turn_on
+            entity_id: input_boolean.bedroomrgb
+          - service: script.bedroom_rgb_on
         turn_off:
-          service: remote.send_command
-          target:
-            entity_id: remote.living_room
-          data:
-            command:
-              - Power Off
-            device: 66670926
+          - service: input_boolean.turn_off
+            entity_id: input_boolean.bedroomrgb
+          - service: script.bedroom_rgb_off
   - platform: template
     switches:
-      bathroomfan:
+      bathroom_fan_full_on:
+        value_template: "{{ is_state('input_boolean.bathroom_fan_full_on', 'on') }}"
         turn_on:
-          service: script.turn_on
-          entity_id: script.bathroom_fan_full_on
+          - service: input_boolean.turn_on
+            entity_id: input_boolean.bathroom_fan_full_on
+          - service: script.bathroom_fan_full_on
         turn_off:
-          service: light.turn_off
-          entity_id: switch.bathroom_fan
+          - service: input_boolean.turn_off
+            entity_id: input_boolean.bathroom_fan_full_on
+          - service: script.bathroom_fan_full_on
+          - service: switch.turn_off
+            entity_id: switch.bathroom_fan_on_off
   - platform: template
     switches:
-      laundryroomfan:
+      laundryroomfan2hourtimer:
+        value_template: "{{ is_state('input_boolean.laundry_room_fan_timer', 'on') }}"
         turn_on:
-          service: script.turn_on
-          entity_id: script.laundry_room_fan_on
+          - service: input_boolean.turn_on
+            entity_id: input_boolean.laundry_room_fan_timer
+          - service: script.laundry_room_fan_on
         turn_off:
-          service: light.turn_off
-          entity_id: switch.laundry_fan
+          - service: input_boolean.turn_off
+            entity_id: input_boolean.laundry_room_fan_timer
+          - service: script.laundry_room_fan_on
+          - service: switch.turn_off
+            entity_id: switch.laundry_fan
+  - platform: template
+    switches:
+      bedroom_led_string:
+        value_template: "{{ is_state('input_boolean.bedroom_led_string', 'on') }}"
+        turn_on:
+          - service: input_boolean.turn_on
+            entity_id: input_boolean.bedroom_led_string
+          - service: script.bedroom_led_on
+        turn_off:
+          - service: input_boolean.turn_off
+            entity_id: input_boolean.bedroom_led_string
+          - service: script.bedroom_led_off
 
+input_text:
+  songtitle:
+    name: Song Title
+    initial: Input song title or genre
 
 #################################
 #     Home Assistant Config     #
@@ -97,97 +168,139 @@ homeassistant:
     light.main_kitchen_light:
       friendly_name: Main Kitchen Light
       icon: mdi:dome-light
-    light.1kitchen_cabinet_light:
+    light.kitchen_cabinet_light:
       friendly_name: Kitchen Cabinet Light
       icon: mdi:led-strip-variant
-    light.garbage_disposal:
-      friendly_name: Garbage Disposal
-      icon: mdi:delete-circle-outline
+    switch.nasa_lava_lamp:
+      friendly_name: Nasa Lava Lamp
+      icon: mdi:rocket
+
     #######################
     #     Dining Room     #
     #######################
     light.main_dining_room_light:
       friendly_name: Main Dining Room Light
       icon: mdi:track-light
-    switch.occulus_light:
-      friendly_name: Occulus Light
+    switch.oculus_light_on_off:
+      friendly_name: Oculus Light
       icon: mdi:eye-outline
+
     #######################
     #     Living Room     #
     #######################
     media_player.living_room:
       friendly_name: Sonos Living Room
       icon: mdi:disc-player
-    switch.living_room_tv_power:
+    switch.living_room_tv_switch:
         friendly_name: Living Room TV Power
         icon: mdi:television
     switch.living_room_watch_apple_tv:
       friendly_name: Watch Apple TV Living Room
       icon: mdi:youtube-tv
-    light.main_living_room_lamp:
+    light.main_living_room_light:
       friendly_name: Main Living Room Light
       icon: mdi:floor-lamp
-    light.couch_light:
+    light.couch_light_on_off:
       friendly_name: Couch Light
       icon: mdi:lightbulb-outline
-    light.couch_rgb:
+    light.couch_rgb_on_off:
       friendly_name: Couch RGB
       icon: mdi:lightbulb-on-outline
-    light.tv_rgb:
+    light.tv_rgb_on_off:
       friendly_name: TV RGB
       icon: mdi:lightbulb-on-outline
-    light.christmas_tree_light:
-      friendly_name: Christmas Tree Light
-      icon: mdi:pine-tree
+    switch.tetris_light_on_off:
+      friendly_name: Tetris Light
+      icon: mdi:laravel
+      #icon: mdi:view-quilt-outline
+    script.living_room_tv_power_cycle:
+      friendly_name: Living Room TV Power Cycle
+      icon: mdi:television
+    script.start_disneyplus:
+      friendly_name: Start Disney Plus
+      entity_picture: /local/icons/icons8-disney-plus-50x50.png
+
     ###################
     #     Bedroom     #
     ###################
     switch.living_room_watch_fire_tv_bedroom:
       friendly_name: Watch Fire TV Bedroom
       icon: mdi:youtube-tv
-    light.1joes_light:
+    light.joes_light_on_off:
       friendly_name: Joes Light
       icon: mdi:lightbulb-outline
-    light.1shirleys_light:
+    light.shirleys_light_on_off:
       friendly_name: Shirleys Light
       icon: mdi:lightbulb-outline
-    light.led_string_lights:
+    switch.bedroom_led_string:
       friendly_name: LED String Lights
       icon: mdi:string-lights
     switch.bedroomrgb:
       friendly_name: Bedroom RGB
       icon: mdi:wall-sconce-flat-variant
-    switch.bedroom_closet:
+    switch.bedroom_dyson_power_switch:
+        friendly_name: Bedroom Dyson Power Switch
+        icon: mdi:power
+    sensor.bedroom_dyson_power_active_power:
+      friendly_name: Bedroom Dyson Current
+      icon: mdi:sine-wave
+    sensor.bedroom_dyson_power_power_factor:
+      friendly_name: Bedroom Dyson Power Factor
+    sensor.bedroom_dyson_power_rms_current:
+      friendly_name: Bedroom Dyson RMS Current
+      icon: mdi:current-ac
+    sensor.bedroom_dyson_power_rms_voltage:
+      friendly_name: Bedroom Dyson RMS Voltage
+      icon: mdi:flash-triangle-outline
+    sensor.bedroom_dyson_power_summation_delivered:
+      friendly_name: Bedroom Dyson Power Summation Delivered
+      icon: mdi:meter-electric-outline
+    switch.bedroom_closet_light_on_off:
       friendly_name: Bedroom Closet Light
       icon: mdi:dome-light
+    sensor.shroom_bin_01_humidity:
+      friendly_name: Bin 1 Humidity
+      icon: mdi:mushroom-outline
+    sensor.shroom_bin_01_temperature:
+      friendly_name: Bin 1 Temperature
+      icon: mdi:mushroom-outline
+    sensor.bedroom_temp_sensor_temperature:
+      friendly_name: Room Temp
+      icon: mdi:thermometer
+    sensor.bedroom_temp_sensor_humidity:
+      friendly_name: Room Humidity
+      icon: mdi:cloud-percent
+
     ########################
     #     Laundry Room     #
     ########################
     switch.laundry_fan:
       friendly_name: Laundry Fan
       icon: mdi:fan
-    switch.laundryroomfan:
+    switch.laundryroomfan2hourtimer:
       friendly_name: 2 Hour Timer
       icon: mdi:fan-speed-2
+    
     ####################
     #     Bathroom     #
     ####################
     light.bathroom_main_light:
       friendly_name: Main Bathroom Light
       icon: mdi:vanity-light
-    switch.bathroom_fan:
+    switch.bathroom_fan_on_off:
       friendly_name: Bathroom Fan
       icon: mdi:emoticon-poop
-    light.laundry_fan:
-      friendly_name: Laundry Fan
-      icon: mdi:fan
+    switch.bathroom_fan_full_on:
+      friendly_name: Bathroom Fan
+      icon: mdi:emoticon-poop
+
     ################
     #     Desk     #
     ################
-    light.1desk_light:
+    light.desk_light:
       friendly_name: Desk Light
       icon: mdi:led-strip-variant
-    switch.laptop:
+    switch.laptop_on_off:
       friendly_name: Laptop
       icon: mdi:laptop
 
@@ -209,7 +322,7 @@ lovelace:
       type: module
     - url: /hacsfiles/lovelace-hui-element/hui-element.js
       type: module
-    - url: /local/state-switch.js
+    - url: /hacsfiles/lovelace-state-switch/state-switch.js
       type: module
 
 #zwave:
@@ -219,9 +332,9 @@ lovelace:
 ##########################
 #     Google Calendar    #
 ##########################
-google:
-  client_id: !secret google_client_id_calendar
-  client_secret: !secret google_client_secret_calendar
+#google:
+  #client_id: !secret google_client_id_calendar
+  #client_secret: !secret google_client_secret_calendar
 
 #########################
 #     Included Files    #
@@ -229,4 +342,5 @@ google:
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
+scene old: !include scenes_old.yaml
 scene: !include scenes.yaml

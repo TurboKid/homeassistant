@@ -148,7 +148,7 @@
       xy_color:
       - 0.561
       - 0.404
-- id: '2679462782702'
+- id: working_at_desk
   name: Working at Desk
   entities:
     light.desk_light:
@@ -169,8 +169,8 @@
       icon: mdi:laptop
       state: 'on'
   metadata: {}
-  icon: mdi:brush-variant
-- id: '3426196745960'
+  icon: mdi:palette
+- id: Bright_at_desk
   name: Bright at Desk
   entities:
     light.desk_light:
@@ -186,8 +186,9 @@
       state: 'on'
       supported_features: 63
       icon: mdi:led-strip-variant
-  icon: mdi:brush-variant
-- id: '8432769262028'
+  metadata: {}
+  icon: mdi:palette
+- id: spring_blossom_desk
   name: Spring Blossom at Desk
   entities:
     light.desk_light:
@@ -211,7 +212,7 @@
       xy_color:
       - 0.279
       - 0.159
-- id: '0642739262810'
+- id: tropical_twilight_desk
   name: Tropical Twilight at Desk
   entities:
     light.desk_light:
@@ -235,7 +236,7 @@
       xy_color:
       - 0.291
       - 0.225
-- id: '3835274926720'
+- id: savanna_sunset_desk
   name: Savanna Sunset at Desk
   entities:
     light.desk_light:
@@ -259,7 +260,7 @@
       xy_color:
       - 0.465
       - 0.448
-- id: '9427381802991'
+- id: dimmed_desk
   name: Dimmed at Desk
   entities:
     light.desk_light:
@@ -274,7 +275,31 @@
       min_mireds: 153
       state: 'on'
       supported_features: 63
-- id: '2185790855992'
+- id: arctic_aurora_desk
+  name: Arctic Aurora at Desk
+  entities:
+    light.desk_light:
+      brightness: 139
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Desk LED
+      hs_color:
+      - 200.448
+      - 87.451
+      max_mireds: 65535
+      min_mireds: 153
+      rgb_color:
+      - 31
+      - 179
+      - 255
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.149
+      - 0.219
+- id: nightlight_desk
   name: Nightlight at Desk
   entities:
     light.desk_light:
@@ -298,7 +323,7 @@
       xy_color:
       - 0.561
       - 0.404
-- id: '6423800855999'
+- id: bright_livingroom_rgb
   name: Bright in Living Room
   entities:
     group.living_room_rgb:
@@ -313,7 +338,7 @@
       min_mireds: 153
       state: 'on'
       supported_features: 63
-- id: '7141841795991'
+- id: spring_blossom_livingroom_rgb
   name: Spring Blossom in Living Room
   entities:
     group.living_room_rgb:
@@ -337,7 +362,7 @@
       xy_color:
       - 0.394
       - 0.295
-- id: '2193800857191'
+- id: tropical_twilight_livingroom_rgb
   name: Tropical Twilight in Living Room
   entities:
     group.living_room_rgb:
@@ -361,7 +386,7 @@
       xy_color:
       - 0.291
       - 0.225
-- id: '2703800855531'
+- id: savanna_sunset_livingroom_rgb
   name: Savanna Sunset in Living Room
   entities:
     group.living_room_rgb:
@@ -385,7 +410,7 @@
       xy_color:
       - 0.465
       - 0.448
-- id: '1493800838992'
+- id: dimmed_livingroom_rgb
   name: Dimmed in Living Room
   entities:
     group.living_room_rgb:
@@ -400,7 +425,7 @@
       min_mireds: 153
       state: 'on'
       supported_features: 63
-- id: '1593831856992'
+- id: arctic_aurora_livingroom_rgb
   name: Arctic Aurora in Living Room
   entities:
     group.living_room_rgb:
@@ -424,7 +449,7 @@
       xy_color:
       - 0.149
       - 0.219
-- id: '3412800855891'
+- id: nightlight_livingroom_rgb
   name: Nightlight in Living Room
   entities:
     group.living_room_rgb:
@@ -448,7 +473,7 @@
       xy_color:
       - 0.561
       - 0.404
-- id: '2151802835991'
+- id: ikea_column_light_gradient_1
   name: Ikea Column Light Gradient 1
   entities:
     light.ikea_column_light_01:

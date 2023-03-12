@@ -76,43 +76,52 @@ views:
         entities:
         - group.all_lights
         - light.main_kitchen_light
-        - light.1kitchen_cabinet_light
+        - light.kitchen_cabinet_light
         - light.main_dining_room_light
-        - switch.occulus_light
+        - switch.oculus_light_on_off
+        - switch.nasa_lava_lamp
         - switch.living_room_watch_apple_tv
-        - light.main_living_room_lamp
-        - light.1couch_light
-        - light.couch_rgb
-        - light.tv_rgb
-        - switch.christmas_tree_light
+        - light.main_living_room_light
+        - light.couch_light_on_off
+        - light.couch_rgb_on_off
+        - light.tv_rgb_on_off
+        - switch.tetris_light_on_off
+        - group.ikea_column
         - switch.living_room_watch_fire_tv_bedroom
-        - light.1joes_light
-        - light.1shirleys_light
-        - light.led_string_lights
-        - switch.bedroom_closet
+        - light.joes_light_on_off
+        - light.shirleys_light_on_off
+        - switch.bedroom_led_string
+        - switch.bedroom_closet_light_on_off
         - switch.laundry_fan
         - light.bathroom_main_light
-        - switch.bathroom_fan
-        - light.1desk_light
-        - switch.laptop
+        - switch.bathroom_fan_on_off
+        - light.desk_light
+        - switch.laptop_on_off
+
     ###################
     #     Bedroom     #
     ###################
       - title: Bedroom
         type: entities
         entities:
+        - entity: sensor.bedroom_temp_sensor_temperature
+        - entity: sensor.bedroom_temp_sensor_humidity
         - entity: group.bedroom_lights
         - name: Joes Light
           type: custom:slider-entity-row
-          entity: light.1joes_light
+          entity: light.joes_light_on_off
           toggle: true
         - name: Shirley's Light
           type: custom:slider-entity-row
-          entity: light.1shirleys_light
+          entity: light.shirleys_light_on_off
           toggle: true
-        - entity: light.led_string_lights
+        - entity: switch.bedroom_led_string
         - entity: switch.bedroomrgb
-        - entity: switch.bedroom_closet
+        - entity: switch.bedroom_closet_light_on_off
+        #- entity: switch.shroom_bin_lights
+        #- entity: sensor.shroom_bin_01_humidity
+        #- entity: sensor.shroom_bin_01_temperature 
+
     #######################
     #     Dining Room     #
     #######################
@@ -123,22 +132,33 @@ views:
           type: custom:slider-entity-row
           entity: light.main_dining_room_light
           toggle: true
-        - entity: switch.occulus_light
+        - entity: switch.nasa_lava_lamp
+        - entity: switch.oculus_light_on_off
+
     ###################
     #     Kitchen     #
     ###################
       - title: Kitchen
         type: entities
         entities:
-        - entity: light.garbage_disposal
         - name: Under Cabinet Light
           type: custom:slider-entity-row
-          entity: light.1kitchen_cabinet_light
+          entity: light.kitchen_cabinet_light
           toggle: true
         - name: Main Kitchen Light
           type: custom:slider-entity-row
           entity: light.main_kitchen_light
           toggle: true
+        - name: Kitchen Sonos
+          type: custom:mini-media-player
+          entity: media_player.sonos_kitchen
+          icon: 'mdi:cast'
+          artwork: cover
+          show_source: true
+          more_info: false
+          hide_power: true
+        - name: Bass
+          entity: number.sonos_kitchen_bass
         - entity: scene.cooking_in_kitchen
         - entity: scene.spring_blossom_in_kitchen
         - entity: scene.tropical_twilight_in_kitchen
@@ -146,29 +166,59 @@ views:
         - entity: scene.arctic_aurora_in_kitchen
         - entity: scene.dimmed_in_kitchen
         - entity: scene.nightlight_in_kitchen
+
     #######################
     #     Living Room     #
     #######################
       - title: Living Room
         type: entities
         entities:
+        - type: custom:hui-element
+          card_type: glance
+          entities:
+            - name: Living Room TV Power Cycle
+              entity: script.living_room_tv_power_cycle
+        - name: Living Room Sonos
+          type: custom:mini-media-player
+          entity: media_player.sonos_living_room
+          icon: 'mdi:cast'
+          artwork: cover
+          show_source: true
+          more_info: false
+          hide_power: true
+        - name: Bass
+          entity: number.sonos_living_room_bass
+        - name: Treble
+          entity: number.sonos_living_room_treble
+        - type: custom:hui-element
+          card_type: glance
+          entities:
+            - name: Audio Input Format
+              entity: sensor.sonos_living_room_audio_input_format
+            - name: Night Sound
+              entity: switch.sonos_living_room_night_sound
+            - name: Speech Enhancement
+              entity: switch.sonos_living_room_speech_enhancement
+            - name: Surround Enabled
+              entity: switch.sonos_living_room_surround_enabled
         - name: Main Lamp
           type: custom:slider-entity-row
-          entity: light.main_living_room_lamp
+          entity: light.main_living_room_light
           toggle: true
         - name: Couch Light
           type: custom:slider-entity-row
-          entity: light.1couch_light
+          entity: light.couch_light_on_off
           toggle: true
         - name: Couch RGB
           type: custom:slider-entity-row
-          entity: light.couch_rgb
+          entity: light.couch_rgb_on_off
           toggle: true
         - name: TV RGB
           type: custom:slider-entity-row
-          entity: light.tv_rgb
+          entity: light.tv_rgb_on_off
           toggle: true
-        - entity: switch.christmas_tree_light
+        - entity: switch.tetris_light_on_off
+        - entity: group.ikea_column
         - entity: group.living_room_rgb
         - entity: scene.bright_in_living_room
         - entity: scene.spring_blossom_in_living_room
@@ -177,14 +227,19 @@ views:
         - entity: scene.arctic_aurora_in_living_room
         - entity: scene.dimmed_in_living_room
         - entity: scene.nightlight_in_living_room
+
     ########################
     #     Laundry Room     #
     ########################
       - title: Laundry Room
         type: entities
         entities:
-          - entity: switch.laundry_fan
-          - entity: switch.laundryroomfan
+          - type: custom:hui-element
+            card_type: glance
+            entities:
+              - switch.laundry_fan
+              - switch.laundryroomfan2hourtimer
+
     ####################
     #     Bathroom     #
     ####################
@@ -195,15 +250,16 @@ views:
           entity: sensor.bathroom_sensor_air_temperature
         - name: Motion detection
           entity: binary_sensor.bathroom_sensor_motion
-        - name: Humidity
-          entity: sensor.bathroom_sensor_humidity
+        #- name: Humidity
+          #entity: sensor.bathroom_sensor_humidity
         - name: Illuminance
           entity: sensor.bathroom_sensor_illuminance
         - name: Main Bathroom Light
           type: custom:slider-entity-row
           entity: light.bathroom_main_light
           toggle: true
-        - entity: switch.bathroom_fan
+        - entity: switch.bathroom_fan_full_on
+
     ################
     #     Desk     #
     ################  
@@ -212,25 +268,32 @@ views:
         entities:
         - name: Desk LED
           type: custom:slider-entity-row
-          entity: light.1desk_light
+          entity: light.desk_light
           toggle: true
-        - entity: switch.laptop
+        - entity: switch.laptop_on_off
         - entity: scene.working_at_desk
+        - entity: scene.bright_at_desk
         - entity: scene.spring_blossom_at_desk
         - entity: scene.tropical_twilight_at_desk
         - entity: scene.savanna_sunset_at_desk
         - entity: scene.arctic_aurora_at_desk
         - entity: scene.dimmed_at_desk
         - entity: scene.nightlight_at_desk
+
+  
   ################################
   #     Living Room Apple TV     #
   ################################
   - title: Watch Apple TV
     path: watch_apple_tv
     cards:
+          
       - title: Living Room Apple TV
         type: entities
         entities:
+          ###################
+          #     1st Row     #
+          ###################
           - card_type: horizontal-stack
             cards:
               - type: 'custom:button-card'
@@ -260,6 +323,9 @@ views:
               - type: 'custom:button-card'
                 color_type: blank-card
             type: 'custom:hui-element'
+          ###################
+          #     2nd Row     #
+          ###################
           - card_type: horizontal-stack
             cards:
               - type: 'custom:button-card'
@@ -281,6 +347,9 @@ views:
               - type: 'custom:button-card'
                 color_type: blank-card
             type: 'custom:hui-element'
+          ###################
+          #     3rd Row     #
+          ###################
           - card_type: horizontal-stack
             cards:
               - type: 'custom:button-card'
@@ -318,6 +387,9 @@ views:
               - type: 'custom:button-card'
                 color_type: blank-card
             type: 'custom:hui-element'
+          ###################
+          #     4th Row     #
+          ###################
           - card_type: horizontal-stack
             cards:
               - type: 'custom:button-card'
@@ -339,6 +411,9 @@ views:
               - type: 'custom:button-card'
                 color_type: blank-card
             type: 'custom:hui-element'
+          ###################
+          #     5th Row     #
+          ###################
           - card_type: horizontal-stack
             cards:
               - type: 'custom:button-card'
@@ -368,6 +443,9 @@ views:
               - type: 'custom:button-card'
                 color_type: blank-card
             type: 'custom:hui-element'
+          ###################
+          #     6th Row     #
+          ###################
           - card_type: horizontal-stack
             cards:
               - type: 'custom:button-card'
@@ -397,6 +475,9 @@ views:
               - type: 'custom:button-card'
                 color_type: blank-card
             type: 'custom:hui-element'
+          ###################
+          #     7th Row     #
+          ###################
           - card_type: horizontal-stack
             cards:
               - type: 'custom:button-card'
@@ -426,6 +507,9 @@ views:
               - type: 'custom:button-card'
                 color_type: blank-card
             type: 'custom:hui-element'
+          ###################
+          #     8th Row     #
+          ###################
           - card_type: horizontal-stack
             cards:
               - type: 'custom:button-card'
@@ -463,15 +547,58 @@ views:
               - type: 'custom:button-card'
                 color_type: blank-card
             type: 'custom:hui-element'
-  ################################
+          ###################
+          #     9th Row     #
+          ###################
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:netflix
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.start_netflix
+                template: menu_button
+                type: 'custom:button-card'
+              - styles:
+                  icon:
+                    - color: white
+                show_entity_picture: true
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.start_disneyplus
+                template: menu_button
+                type: 'custom:button-card'
+              - icon: mdi:menu-up
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.living_room_tv_ch_up
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'
+  ###########################
   #     Bedroom Fire TV     #
-  ################################
+  ###########################
   - title: Watch Fire TV
     path: watch_fire_tv
     cards:
       - title: Bedroom Fire TV
         type: entities
         entities:
+          ###################
+          #     1st Row     #
+          ###################
           - card_type: horizontal-stack
             cards:
               - type: 'custom:button-card'
@@ -483,7 +610,7 @@ views:
                 tap_action:
                   service: script.turn_on
                   service_data:
-                    entity_id: script.bedroom_apple_tv_on
+                    entity_id: script.bedroom_fire_tv_on
                 template: menu_button
                 type: 'custom:button-card'
               - type: 'custom:button-card'
@@ -495,12 +622,15 @@ views:
                 tap_action:
                   service: script.turn_on
                   service_data:
-                    entity_id: script.bedroom_apple_tv_off
+                    entity_id: script.bedroom_fire_tv_off
                 template: menu_button
                 type: 'custom:button-card'
               - type: 'custom:button-card'
                 color_type: blank-card
             type: 'custom:hui-element'
+          ###################
+          #     2nd Row     #
+          ###################
           - card_type: horizontal-stack
             cards:
               - type: 'custom:button-card'
@@ -522,6 +652,9 @@ views:
               - type: 'custom:button-card'
                 color_type: blank-card
             type: 'custom:hui-element'
+          ###################
+          #     3rd Row     #
+          ###################
           - card_type: horizontal-stack
             cards:
               - type: 'custom:button-card'
@@ -559,6 +692,9 @@ views:
               - type: 'custom:button-card'
                 color_type: blank-card
             type: 'custom:hui-element'
+          ###################
+          #     4th Row     #
+          ###################
           - card_type: horizontal-stack
             cards:
               - type: 'custom:button-card'
@@ -580,6 +716,9 @@ views:
               - type: 'custom:button-card'
                 color_type: blank-card
             type: 'custom:hui-element'
+          ###################
+          #     5th Row     #
+          ###################
           - card_type: horizontal-stack
             cards:
               - type: 'custom:button-card'
@@ -609,6 +748,9 @@ views:
               - type: 'custom:button-card'
                 color_type: blank-card
             type: 'custom:hui-element'
+          ###################
+          #     6th Row     #
+          ###################
           - card_type: horizontal-stack
             cards:
               - type: 'custom:button-card'
@@ -638,6 +780,9 @@ views:
               - type: 'custom:button-card'
                 color_type: blank-card
             type: 'custom:hui-element'
+          ###################
+          #     7th Row     #
+          ###################
           - card_type: horizontal-stack
             cards:
               - type: 'custom:button-card'
@@ -667,6 +812,9 @@ views:
               - type: 'custom:button-card'
                 color_type: blank-card
             type: 'custom:hui-element'
+          ###################
+          #     8th Row     #
+          ###################
           - card_type: horizontal-stack
             cards:
               - type: 'custom:button-card'
@@ -699,6 +847,196 @@ views:
                   service: script.turn_on
                   service_data:
                     entity_id: script.bedroom_tv_ch_up
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'
+
+  #########################
+  #     Bedroom Dyson     #
+  #########################
+  - title: Bedroom Dyson
+    path: bedroom_dyson
+    cards:
+      - title: Bedroom Dyson
+        type: entities
+        entities:
+          ###################
+          #     1st Row     #
+          ###################
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:power
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_dyson_power
+                template: menu_button
+                type: 'custom:button-card'
+              - icon: mdi:information-outline
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_dyson_info
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'
+          ###################
+          #     2nd Row     #
+          ###################
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:fan-plus
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_dyson_fan_up
+                template: menu_button
+                type: 'custom:button-card'
+              - icon: mdi:circle-slice-8
+                styles:
+                  icon:
+                    - color: red
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_dyson_heat_up
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'
+          ###################
+          #     3rd Row     #
+          ###################
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:fan-minus
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_dyson_fan_down
+                template: menu_button
+                type: 'custom:button-card'
+              - icon: mdi:record-circle-outline
+                styles:
+                  icon:
+                    - color: red
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_dyson_heat_down
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'
+          ###################
+          #     4th Row     #
+          ###################
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:auto-fix
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_dyson_auto
+                template: menu_button
+                type: 'custom:button-card'
+              - icon: mdi:circle-medium
+                styles:
+                  icon:
+                    - color: blue
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_dyson_cool
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'
+          ###################
+          #     5th Row     #
+          ###################
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:arrow-left-right-bold-outline
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_dyson_oscillate
+                template: menu_button
+                type: 'custom:button-card'
+              - icon: mdi:arrow-u-up-right-bold
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_dyson_oscillate
+                template: menu_button
+                type: 'custom:button-card'
+              - type: 'custom:button-card'
+                color_type: blank-card
+            type: 'custom:hui-element'
+          ###################
+          #     6th Row     #
+          ###################
+          - card_type: horizontal-stack
+            cards:
+              - type: 'custom:button-card'
+                color_type: blank-card
+              - icon: mdi:camera-timer
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_dyson_timer
+                template: menu_button
+                type: 'custom:button-card'
+              - icon: mdi:power-sleep
+                styles:
+                  icon:
+                    - color: white
+                tap_action:
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.bedroom_dyson_sleep
                 template: menu_button
                 type: 'custom:button-card'
               - type: 'custom:button-card'
